@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automated Contact System — Portfolio Case Study · Jamie Iha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #B07D3A;
+    --accent-light: #FAF3E8;
+    --accent-mid: #C9913F;
+    --accent-dark: #7A5520;
+    --accent-border: #D4A05A;
+    --green-50: #E1F5EE;
+    --green-600: #0F6E56;
+    --blue-50: #E6F1FB;
+    --blue-600: #185FA5;
+    --purple-50: #EEEDFE;
+    --purple-600: #534AB7;
+    --gray-50: #FAFAF8;
+    --gray-100: #F2F1ED;
+    --border: rgba(0,0,0,0.09);
+    --border-strong: rgba(0,0,0,0.15);
+    --text: #181816;
+    --text-muted: #686864;
+    --text-light: #9A9994;
+    --white: #ffffff;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--gray-50);
+    line-height: 1.6;
+    padding: 2.5rem 1.5rem 5rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.875rem;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 15.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.75rem; }
+
+  .tag {
+    font-size: 11.5px;
+    padding: 4px 11px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border-strong);
+    color: var(--text-muted);
+    background: var(--gray-100);
+  }
+
+  .tag.accent {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    border-color: var(--accent-border);
+    font-weight: 500;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--accent);
+    padding: 9px 18px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .cta-link:hover { background: var(--accent-dark); }
+
+  .section { margin-bottom: 2rem; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 1.125rem;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .metric {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.125rem;
+  }
+
+  .metric-label { font-size: 11px; color: var(--text-light); margin-bottom: 5px; }
+  .metric-value { font-size: 24px; font-weight: 500; color: var(--text); line-height: 1.05; letter-spacing: -0.02em; }
+  .metric-note { font-size: 11px; color: var(--accent); margin-top: 4px; font-weight: 500; }
+
+  /* Flow */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .flow-step {
+    background: var(--white);
+    padding: 1.25rem 1rem;
+    text-align: center;
+    position: relative;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .flow-step:last-child { border-right: none; }
+
+  .flow-step::after {
+    content: '→';
+    position: absolute;
+    right: -9px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--text-light);
+    z-index: 1;
+    background: var(--white);
+    padding: 1px 2px;
+  }
+
+  .flow-step:last-child::after { display: none; }
+
+  .flow-num {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  .flow-label { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .flow-sub { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.375rem 1.5rem;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0.625rem;
+  }
+
+  .card-title { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.25; }
+  .card-body { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .pill-gold   { background: var(--accent-light); color: var(--accent-dark); }
+  .pill-green  { background: var(--green-50);     color: var(--green-600); }
+  .pill-blue   { background: var(--blue-50);      color: var(--blue-600); }
+  .pill-purple { background: var(--purple-50);    color: var(--purple-600); }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stack-item {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.125rem;
+  }
+
+  .stack-layer { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 5px; }
+  .stack-tech { font-size: 14.5px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .stack-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .divider { height: 0.5px; background: var(--border); margin: 2rem 0; }
+
+  .star-row { display: flex; flex-direction: column; gap: 0; }
+
+  .star-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 1rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .star-item:last-child { border-bottom: none; }
+
+  .star-key { font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); padding-top: 3px; }
+  .star-val { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .star-val strong { color: var(--text); font-weight: 500; }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .signal-card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.375rem;
+  }
+
+  .signal-domain { font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .signal-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+  .signal-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  @media (max-width: 560px) {
+    body { padding: 1.5rem 1rem 3rem; }
+    .hero { padding: 1.75rem 1.5rem 1.5rem; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow-step::after { display: none; }
+    .card-grid { grid-template-columns: 1fr; }
+    .stack-row { grid-template-columns: 1fr 1fr; }
+    .signal-grid { grid-template-columns: 1fr; }
+    .star-item { grid-template-columns: 72px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">Portfolio Case Study · Automation &amp; Systems Design</p>
+  <h1 class="hero-title">Automated Contact System —<br><em>Zero-Friction Lead Capture</em></h1>
+  <p class="hero-sub">Most business cards get thrown away. I built a system where the contact comes to me — a single email input triggers an instant, personalized delivery of my full contact info, automatically.</p>
+  <div class="tag-row">
+    <span class="tag accent">Self-initiated</span>
+    <span class="tag">End-to-end build</span>
+    <span class="tag">Automation</span>
+    <span class="tag">Lead capture</span>
+    <span class="tag">Zero ongoing cost</span>
+    <span class="tag">Live in production</span>
+  </div>
+  <a class="cta-link" href="https://jamieiha1111.github.io/connect/" target="_blank">See it live ↗</a>
+</div>
+
+<div class="section">
+  <p class="section-label">Project at a glance</p>
+  <div class="metrics">
+    <div class="metric">
+      <p class="metric-label">Build time</p>
+      <p class="metric-value" style="font-size:18px">1 session</p>
+      <p class="metric-note">Concept to live</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Ongoing cost</p>
+      <p class="metric-value">$0</p>
+      <p class="metric-note">Free stack, forever</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Steps to connect</p>
+      <p class="metric-value">1</p>
+      <p class="metric-note">Email → done</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Response time</p>
+      <p class="metric-value" style="font-size:18px">&lt;60s</p>
+      <p class="metric-note">Instant delivery</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">The problem</p>
+  <p style="font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:0.875rem;">Networking is high-stakes and high-volume. Business cards solve the moment but fail the follow-through — most end up in a pocket, then a drawer, then a trash can. <strong style="color:var(--text);font-weight:500">The contact is lost before the relationship begins.</strong></p>
+  <p style="font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:0.875rem;">The alternative — asking someone to add your number on the spot, or hoping they'll remember to search for you — creates friction at exactly the wrong moment.</p>
+  <div style="border-left:3px solid var(--accent);padding:1rem 1.25rem;background:var(--accent-light);border-radius:0 var(--radius-md) var(--radius-md) 0;font-size:14.5px;color:var(--accent-dark);line-height:1.65;font-style:italic;">The insight: if they give you their email, you don't need them to remember anything. The connection follows them home.</div>
+</div>
+
+<div class="section">
+  <p class="section-label">How it works</p>
+  <div class="flow">
+    <div class="flow-step">
+      <p class="flow-num">Step 1</p>
+      <p class="flow-label">Share the link</p>
+      <p class="flow-sub">Phone home screen or QR code in-person</p>
+    </div>
+    <div class="flow-step">
+      <p class="flow-num">Step 2</p>
+      <p class="flow-label">They enter email</p>
+      <p class="flow-sub">One field, one tap — no account needed</p>
+    </div>
+    <div class="flow-step">
+      <p class="flow-num">Step 3</p>
+      <p class="flow-label">Script fires</p>
+      <p class="flow-sub">Google Apps Script triggers instantly on submit</p>
+    </div>
+    <div class="flow-step">
+      <p class="flow-num">Step 4</p>
+      <p class="flow-label">Email delivered</p>
+      <p class="flow-sub">Full contact info in their inbox in &lt;60 seconds</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">What I built</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-head">
+        <p class="card-title">Branded landing page</p>
+        <span class="pill pill-gold">Frontend</span>
+      </div>
+      <p class="card-body">Custom HTML/CSS page — dark, minimal, premium — designed to feel like an extension of a personal brand, not a generic form. Hosted free on GitHub Pages.</p>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <p class="card-title">Email automation backend</p>
+        <span class="pill pill-green">Automation</span>
+      </div>
+      <p class="card-body">Google Apps Script handles all server-side logic: receives the submitted email, formats a personalized message, and fires it via Gmail — zero latency, zero cost.</p>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <p class="card-title">CORS-safe architecture</p>
+        <span class="pill pill-blue">Engineering</span>
+      </div>
+      <p class="card-body">Solved cross-origin request restrictions that break most simple implementations — built a GET-parameter approach that works reliably across all browsers and devices.</p>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <p class="card-title">Success state UX</p>
+        <span class="pill pill-purple">UX Design</span>
+      </div>
+      <p class="card-body">Animated confirmation state replaces the form on success — clear feedback and an option to send to another contact. No page reload required.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">Tech stack</p>
+  <div class="stack-row">
+    <div class="stack-item">
+      <p class="stack-layer">Frontend</p>
+      <p class="stack-tech">HTML / CSS / JS</p>
+      <p class="stack-desc">Custom-built, no framework, no dependencies</p>
+    </div>
+    <div class="stack-item">
+      <p class="stack-layer">Automation</p>
+      <p class="stack-tech">Google Apps Script</p>
+      <p class="stack-desc">Serverless backend via Gmail API</p>
+    </div>
+    <div class="stack-item">
+      <p class="stack-layer">Hosting</p>
+      <p class="stack-tech">GitHub Pages</p>
+      <p class="stack-desc">Free, always-on, version-controlled</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <p class="section-label">Why this matters</p>
+  <div class="star-row">
+    <div class="star-item">
+      <p class="star-key">Situation</p>
+      <p class="star-val"><strong>Networking events produce contacts that disappear.</strong> Business cards are forgotten, phone numbers aren't saved, LinkedIn requests go unaccepted. Friction happens at the exact moment connection is highest.</p>
+    </div>
+    <div class="star-item">
+      <p class="star-key">Task</p>
+      <p class="star-val"><strong>Build a zero-friction contact capture system</strong> that works in any networking environment — no app, no QR scanner required, no reliance on the other person taking action after the moment.</p>
+    </div>
+    <div class="star-item">
+      <p class="star-key">Action</p>
+      <p class="star-val"><strong>Designed and built a full system end-to-end</strong> — branded landing page, Google Apps Script backend, CORS-safe request handling, and a polished UX confirmation flow. Debugged deployment, version control, and cross-origin issues independently.</p>
+    </div>
+    <div class="star-item">
+      <p class="star-key">Result</p>
+      <p class="star-val"><strong>Live system running at zero cost.</strong> One email input delivers full contact information to any connection in under 60 seconds — automatically, from any device, with no maintenance required.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <p class="section-label">What this signals</p>
+  <div class="signal-grid">
+    <div class="signal-card">
+      <p class="signal-domain">Systems thinking</p>
+      <p class="signal-title">Identified a workflow problem and engineered the solution</p>
+      <p class="signal-body">Didn't look for an app to solve it. Mapped the problem, designed the system, and built it — the same instinct that builds internal tools, automates reporting, and removes operational drag.</p>
+    </div>
+    <div class="signal-card">
+      <p class="signal-domain">Resourcefulness</p>
+      <p class="signal-title">Production-grade output with zero budget</p>
+      <p class="signal-body">Free stack, live system, no ongoing cost. The ability to deliver real outcomes without waiting for resources or headcount is exactly what lean teams need.</p>
+    </div>
+    <div class="signal-card">
+      <p class="signal-domain">Technical range</p>
+      <p class="signal-title">Frontend to backend — without a handoff</p>
+      <p class="signal-body">Owned the full build: UI design, JavaScript logic, serverless backend, deployment debugging, and CORS resolution. Rare in strategy and marketing roles.</p>
+    </div>
+    <div class="signal-card">
+      <p class="signal-domain">Bias for action</p>
+      <p class="signal-title">Saw a gap and closed it — same day</p>
+      <p class="signal-body">No ticket, no approval, no sprint planning. Recognized a problem, built the solution, shipped it live. That speed compounds across an organization.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
